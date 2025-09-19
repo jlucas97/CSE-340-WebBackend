@@ -1,0 +1,90 @@
+/* INVENTORY LIST LAYOUT */
+.inventory-list {
+  list-style: none;
+  margin: 2rem auto;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  max-width: 1200px;
+  width: 90%;
+}
+
+/* INVENTORY ITEM CARD */
+.inventory-list li {
+  display: flex;
+  gap: 2rem;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.inventory-list li:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+}
+
+/* VEHICLE IMAGE */
+.inventory-list img {
+  width: 300px;
+  height: auto;
+  object-fit: cover;
+  flex-shrink: 0;
+  border-radius: 10px 0 0 10px;
+}
+
+/* NAME + PRICE */
+.namePrice {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 1rem 2rem;
+  flex: 1;
+}
+
+.namePrice h2 {
+  margin: 0;
+  font-size: 1.4rem;
+  color: #111;
+}
+
+.namePrice h2 a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.namePrice h2 a:hover {
+  color: var(--primary-color);
+  text-decoration: underline;
+}
+
+.namePrice span {
+  margin-top: 0.6rem;
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: green;
+}
+
+
+@media screen and (min-width: 768px) {
+  .inventory-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .inventory-list li {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .inventory-list img {
+    width: 100%;
+    border-radius: 10px 10px 0 0;
+  }
+
+  .namePrice {
+    padding: 0 auto 1.5rem auto;
+  }
+}
