@@ -68,6 +68,38 @@
 }
 
 
+/*Inventory detail page*/
+
+.vehicle-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.vehicle-detail img {
+  max-width: 100%;
+  border-radius: 8px;
+}
+
+.vehicle-info {
+  background-color: #f9f9f9;
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.vehicle-info h2 {
+  margin: 0.5rem 0;
+}
+
+.vehicle-info .price {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #0066cc;
+}
+
+
+
 @media screen and (min-width: 768px) {
   .inventory-list {
     grid-template-columns: repeat(2, 1fr);
@@ -86,5 +118,17 @@
 
   .namePrice {
     padding: 0 auto 1.5rem auto;
+  }
+
+  .vehicle-detail {
+    flex-direction: row;
+  }
+
+  .vehicle-detail img {
+    max-width: 50%;
+  }
+
+  .vehicle-info {
+    max-width: 50%;
   }
 }
