@@ -1,0 +1,103 @@
+.login-container {
+  max-width: 400px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #2c3e50;
+  color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.login-form label {
+  margin-top: 1rem;
+  font-weight: bold;
+}
+
+.login-form input {
+  padding: 0.5rem;
+  margin-top: 0.25rem;
+  border: none;
+  border-radius: 5px;
+}
+
+.login-form button {
+  margin-top: 1.5rem;
+  padding: 0.75rem;
+  background: beige;
+  color: black;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.login-form button:hover {
+  background: #2980b9;
+}
+
+.flash-message {
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  background: #e74c3c;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.signup-link {
+  margin-top: 1.5rem;
+  text-align: center;
+}
+.signup-link a {
+  color: #f1c40f;
+  text-decoration: none;
+}
+.signup-link a:hover {
+  text-decoration: underline;
+}
+
+.register-container {
+  max-width: 450px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #34495e;
+  color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+
+.register-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.register-form label {
+  margin-top: 1rem;
+  font-weight: bold;
+}
+
+.register-form input {
+  padding: 0.5rem;
+  margin-top: 0.25rem;
+  border: none;
+  border-radius: 5px;
+}
+
+.register-form button {
+  margin-top: 1.5rem;
+  padding: 0.75rem;
+  background: beige;
+  color: black;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.register-form button:hover {
+  background: #1e8449;
+}

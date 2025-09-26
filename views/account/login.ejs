@@ -1,0 +1,27 @@
+<%- include("../partials/header") %>
+
+<main class="login-container">
+  <h1><%= title %></h1>
+
+  <!-- Flash message (if any) -->
+  <% if (typeof message !== "undefined" && message) { %>
+    <div class="flash-message"><%= message %></div>
+  <% } %>
+
+  <!-- Login form -->
+  <form action="/account/login" method="post" class="login-form">
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required />
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required />
+
+    <button type="submit">Login</button>
+  </form>
+
+  <p class="signup-link">
+    No account? <a href="/account/register">Sign-up</a>
+  </p>
+</main>
+
+<%- include("../partials/footer") %>
