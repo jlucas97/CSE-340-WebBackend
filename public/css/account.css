@@ -101,3 +101,25 @@
 .register-form button:hover {
   background: #1e8449;
 }
+
+.password-requirements {
+  margin: 0.5rem 0 1rem;
+  font-size: 0.9rem;
+  color: #ffffff; 
+  background: #2c3e50; 
+  padding: 0.5rem;
+  border-radius: 5px;
+}
+.password-requirements strong {
+  color: #ecf0f1; 
+}
+
+.notice {
+  background: #ffffff;
+  border: 1px solid #f5aca6;
+  color: #740006;
+  padding: 1rem 2rem;
+  margin-bottom: 1rem;
+  border-radius: 5px;
+}
+

@@ -1,34 +1,50 @@
 <%- include("../partials/header") %>
 
-<main class="register-container">
-  <h1><%= title %></h1>
+  <main class="register-container">
+    <h1>
+      <%= title %>
+    </h1>
 
-  <!-- Flash message (if any) -->
-  <% if (typeof message !== "undefined" && message) { %>
-    <div class="flash-message"><%= message %></div>
-  <% } %>
+    <% if (errors && errors.length> 0) { %>
+      <ul class="notice">
+        <% errors.forEach(error=> { %>
+          <li>
+            <%= error.msg %>
+          </li>
+          <% }) %>
+      </ul>
+      <% } %>
 
-  <!-- Registration form -->
-  <form action="/account/register" method="post" class="register-form">
-    <label for="firstname">First Name:</label>
-    <input type="text" id="firstname" name="firstname" required>
+        <!-- Flash message (if any) -->
+        <% if (typeof message !=="undefined" && message) { %>
+          <div class="flash-message">
+            <%= message %>
+          </div>
+          <% } %>
 
-    <label for="lastname">Last Name:</label>
-    <input type="text" id="lastname" name="lastname" required>
+            <!-- Registration form -->
+            <form action="/account/register" method="post" class="register-form">
+              <label for="account_firstname">First Name:</label>
+              <input type="text" id="account_firstname" name="account_firstname" required>
 
-    <label for="email">Email:</label>
-    <input type="email" id="email" name="email" required>
+              <label for="account_lastname">Last Name:</label>
+              <input type="text" id="account_lastname" name="account_lastname" required>
 
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="password"
-      required
-      minlength="12"
-      pattern="(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*]).{8,}"
-      title="At least 12 chars, 1 uppercase, 1 number, 1 special character"
-    >
+              <label for="account_email">Email:</label>
+              <input type="email" id="account_email" name="account_email" required>
 
-    <button type="submit">Register</button>
-  </form>
-</main>
+              <label for="account_password">Password:</label>
+              <div class="password-requirements">
+                Passwords must be at least <strong>12 characters</strong> and contain at least
+                <strong>1 number</strong>,
+                <strong>1 uppercase letter</strong>, and
+                <strong>1 special character</strong>.
+              </div>
+              <input type="password" name="account_password" id="account_password" required
+                pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$"
+                title="At least 12 characters, including 1 number, 1 uppercase letter, and 1 special character" />
+              <button type="submit">Register</button>
+            </form>
+  </main>
 
-<%- include("../partials/footer") %>
+  <%- include("../partials/footer") %>
