@@ -167,13 +167,9 @@ invCont.addInventory = async function (req, res, next) {
     });
 
     if (result.rowCount > 0) {
-      const nav = await utilities.getNav(); // refresh nav
+      const nav = await utilities.getNav(); 
       req.flash("notice", `Inventory item "${inv_make} ${inv_model}" added.`);
-      return res.status(201).render("inventory/management", {
-        title: "Inventory Management",
-        nav,
-        notice: req.flash("notice")[0] || null,
-      });
+      return res.redirect("/inv/");
     }
 
     const nav = await utilities.getNav();

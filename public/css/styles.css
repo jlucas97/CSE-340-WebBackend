@@ -246,6 +246,7 @@ footer {
   padding: 1rem;
   border-top: 1px solid var(--text-color);
   text-align: start;
+  background: var(--background-color);
 }
 
 footer a {
