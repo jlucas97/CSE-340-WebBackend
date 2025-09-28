@@ -100,6 +100,130 @@
 
 
 
+/* ---------- FLASH & ERROR MESSAGES ---------- */
+.flash-message {
+  background-color: #e6ffed;
+  color: #1b5e20;
+  border: 1px solid #a5d6a7;
+  padding: 0.75rem 1rem;
+  margin: 1rem 0;
+  border-radius: 6px;
+  font-weight: 500;
+}
+
+.server-errors {
+  background-color: #ffebee;
+  color: #b71c1c;
+  border: 1px solid #ef9a9a;
+  padding: 0.75rem 1rem;
+  margin: 1rem 0;
+  border-radius: 6px;
+}
+
+.server-errors ul {
+  margin: 0;
+  padding-left: 1.25rem;
+}
+
+.server-errors li {
+  margin: 0.3rem 0;
+}
+
+/* ---------- INVENTORY MANAGEMENT DASHBOARD ---------- */
+.inv-mgmt {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 1rem;
+}
+
+.inv-mgmt h1 {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.inv-mgmt__actions h2 {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.action-cards {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: 1fr;
+}
+
+.action-card {
+  display: block;
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.action-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+}
+
+.action-card h3 {
+  margin-top: 0;
+  color: var(--primary-color, #0066cc);
+}
+
+/* ---------- ADD CLASSIFICATION & VEHICLE FORMS ---------- */
+.inv-form {
+  max-width: 600px;
+  margin: 2rem auto;
+  background: #fff;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.inv-form h1 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.inv-form label {
+  display: block;
+  font-weight: 600;
+  margin-top: 1rem;
+  margin-bottom: 0.3rem;
+}
+
+.inv-form input,
+.inv-form select,
+.inv-form textarea {
+  width: 100%;
+  padding: 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+.inv-form button {
+  margin-top: 1.5rem;
+  padding: 0.8rem 1.2rem;
+  border: none;
+  border-radius: 6px;
+  background: var(--primary-color, #0066cc);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.inv-form button:hover {
+  background: #004999;
+}
+
+
+
 @media screen and (min-width: 768px) {
   .inventory-list {
     grid-template-columns: repeat(2, 1fr);

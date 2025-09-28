@@ -43,7 +43,8 @@
 .flash-message {
   margin-bottom: 1rem;
   padding: 0.5rem;
-  background: #e74c3c;
+  background: #b91c1c;
+  color: #ffffff;
   border-radius: 5px;
   text-align: center;
 }

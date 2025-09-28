@@ -27,7 +27,7 @@ async function getAccountByEmail(account_email) {
   }
 }
 
-module.exports = { registerAccount, getAccountByEmail }
+
 
 module.exports = {
   registerAccount,

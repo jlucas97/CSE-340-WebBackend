@@ -1,0 +1,25 @@
+<%- include("../partials/header") %>
+
+<main class="inv-mgmt">
+  <h1><%= title %></h1>
+
+  <% if (notice) { %>
+    <div class="flash-message"><%= notice %></div>
+  <% } %>
+
+  <section class="inv-mgmt__actions">
+    <h2>Actions</h2>
+    <div class="action-cards">
+      <a href="/inv/add-classification" class="action-card">
+        <h3>Add New Classification</h3>
+        <p>Create a new vehicle category (e.g., SUV, Truck).</p>
+      </a>
+      <a href="/inv/add-inventory" class="action-card">
+        <h3>Add New Inventory</h3>
+        <p>Register a new vehicle to the inventory system.</p>
+      </a>
+    </div>
+  </section>
+</main>
+
+<%- include("../partials/footer") %>
