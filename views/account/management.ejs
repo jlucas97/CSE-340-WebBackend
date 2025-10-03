@@ -1,0 +1,17 @@
+<main>
+  <h1><%= title %></h1>
+
+  <% if (success && success.length) { %>
+    <div class="alert alert-success"><%= success[0] %></div>
+  <% } %>
+
+  <% if (error && error.length) { %>
+    <div class="alert alert-danger"><%= error[0] %></div>
+  <% } %>
+
+  <% if (notice && notice.length) { %>
+    <div class="alert alert-info"><%= notice[0] %></div>
+  <% } %>
+
+  <p>You're logged in 🎉</p>
+</main>
