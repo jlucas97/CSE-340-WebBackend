@@ -1,0 +1,43 @@
+<div class="inv-form">
+  <h1><%= title %></h1>
+  <p>Confirm Deletion - This action is permanent and cannot be undone.</p>
+
+
+
+  <% if (notice> 0) { %>
+    <div class="flash-message">
+      <%= notice %>
+    </div>
+    <% } %>
+
+      <% if (errors && errors.length> 0) { %>
+        <div class="server-errors">
+          <ul>
+            <% errors.forEach(err=> { %><li>
+                <%= err.msg %>
+              </li>
+              <% }) %>
+          </ul>
+        </div>
+        <% } %>
+
+
+          <form action="/inv/delete" method="post" class="delete-inv-form">
+            <label for="inv_make">Make</label>
+            <input id="inv_make" name="inv_make" value="<%= inv_make %>" readonly>
+
+            <label for="inv_model">Model</label>
+            <input id="inv_model" name="inv_model" value="<%= inv_model %>" readonly>
+
+            <label for="inv_year">Year</label>
+            <input id="inv_year" name="inv_year" value="<%= inv_year %>" readonly>
+
+            <label for="inv_price">Price</label>
+            <input id="inv_price" name="inv_price" value="<%= inv_price %>" readonly>
+
+            <input type="hidden" name="inv_id" value="<%= inv_id %>">
+
+            <button type="submit">Delete Vehicle</button>
+          </form>
+
+</div>

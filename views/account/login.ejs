@@ -3,7 +3,7 @@
   <h1><%= title %></h1>
 
   <!-- Flash message (if any) -->
-  <% if (locals.notice) { %>
+  <% if (locals.notice > 0) { %>
     <div class="flash-message">
       <%= notice %>
     </div>

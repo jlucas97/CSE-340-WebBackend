@@ -119,5 +119,93 @@ validate.checkLoginData = async (req, res, next) => {
   next()
 }
 
+/*  **********************************
+ *  Account Update Validation Rules
+ * ********************************* */
+validate.updateAccountRules = () => {
+  return [
+    body("account_firstname")
+      .trim()
+      .notEmpty()
+      .withMessage("First name is required."),
+
+    body("account_lastname")
+      .trim()
+      .notEmpty()
+      .withMessage("Last name is required."),
+
+    body("account_email")
+      .trim()
+      .isEmail()
+      .withMessage("A valid email is required.")
+      .custom(async (account_email, { req }) => {
+        const existingAccount = await accountModel.getAccountByEmail(account_email);
+        // Only fail if email belongs to another user
+        if (existingAccount && existingAccount.account_id != req.body.account_id) {
+          throw new Error("Email already exists. Please use a different one.");
+        }
+      }),
+  ];
+};
+
+/*  **********************************
+ *  Check Account Update Data
+ * ********************************* */
+validate.checkUpdateAccountData = async (req, res, next) => {
+  const { account_id, account_firstname, account_lastname, account_email } = req.body;
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    const nav = await utilities.getNav();
+    return res.status(400).render("account/update", {
+      title: "Update Account",
+      nav,
+      errors: errors.array(),
+      account_id,
+      account_firstname,
+      account_lastname,
+      account_email,
+    });
+  }
+  next();
+};
+
+/*  **********************************
+ *  Password Update Validation Rules
+ * ********************************* */
+validate.updatePasswordRules = () => {
+  return [
+    body("account_password")
+      .trim()
+      .notEmpty()
+      .isStrongPassword({
+        minLength: 12,
+        minLowercase: 1,
+        minUppercase: 1,
+        minNumbers: 1,
+        minSymbols: 1,
+      })
+      .withMessage("Password does not meet requirements."),
+  ];
+};
+
+/*  **********************************
+ *  Check Password Update Data
+ * ********************************* */
+validate.checkUpdatePasswordData = async (req, res, next) => {
+  const { account_id } = req.body;
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    const nav = await utilities.getNav();
+    return res.status(400).render("account/update", {
+      title: "Update Account",
+      nav,
+      errors: errors.array(),
+      account_id,
+    });
+  }
+  next();
+};
+
+
 
 module.exports = validate;

@@ -115,20 +115,22 @@ Util.handleErrors = fn => (req, res, next) => Promise.resolve(fn(req, res, next)
 * Middleware to check token validity
 **************************************** */
 Util.checkJWTToken = (req, res, next) => {
-  if (req.cookies.jwt) {
-    jwt.verify(req.cookies.jwt, process.env.ACCESS_TOKEN_SECRET, (err, accountData) => {
-      if (err) {
-        console.error("❌ JWT verification failed:", err.message)
-        res.clearCookie("jwt")
-        return res.redirect("/account/login")
-      }
-      res.locals.accountData = accountData
-      res.locals.loggedin = 1
-      next()
-    })
-  } else {
-    next()
+  const token = req.cookies.jwt
+  if (!token) {
+    res.locals.loggedin = 0
+    return next()
   }
+
+  try {
+    const payload = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET)
+    res.locals.accountData = payload
+    res.locals.loggedin = 1
+  } catch (err) {
+    console.log("JWT verification failed:", err.message)
+    res.clearCookie("jwt")
+    res.locals.loggedin = 0
+  }
+  next()
 }
 
 /* ****************************************
@@ -142,6 +144,32 @@ Util.checkJWTToken = (req, res, next) => {
     return res.redirect("/account/login")
   }
  }
+
+ /* ****************************************
+ * Require Employee or Admin for inventory admin areas
+ * **************************************** */
+Util.checkAccountType = (req, res, next) => {
+  try {
+    // If JWT was valid, these will exist:
+    const logged = res.locals.loggedin
+    const acct = res.locals.accountData
+
+    if (!logged || !acct) {
+      req.flash("notice", "Please log in")
+      return res.redirect("/account/login")
+    }
+
+    const allowed = acct.account_type === "Employee" || acct.account_type === "Admin"
+    if (!allowed) {
+      req.flash("notice", "You are not authorized to access Inventory Management.")
+      return res.redirect("/account/login")
+    }
+
+    next()
+  } catch (e) {
+    next(e)
+  }
+}
 
 
 module.exports = Util

@@ -1,0 +1,64 @@
+<div class="inv-form">
+  <h1>Edit Vehicle</h1>
+  <p>Modify the details of this vehicle below.</p>
+
+
+  <% if (notice > 0) { %>
+    <div class="flash-message">
+      <%= notice %>
+    </div>
+    <% } %>
+
+      <% if (errors && errors.length> 0) { %>
+        <div class="server-errors">
+          <ul>
+            <% errors.forEach(err=> { %><li>
+                <%= err.msg %>
+              </li>
+              <% }) %>
+          </ul>
+        </div>
+        <% } %>
+
+
+          <form id="updateForm" action="/inv/update" method="post" novalidate class="edit-inv-form">
+            <label for="classificationList">Classification</label>
+            <%- classificationList %>
+
+              <input type="hidden" name="inv_id" value="<%= inv_id %>">
+
+              <label for="inv_make">Make</label>
+              <input id="inv_make" name="inv_make" required value="<%= inv_make %>">
+
+              <label for="inv_model">Model</label>
+              <input id="inv_model" name="inv_model" required value="<%= inv_model %>">
+
+              <label for="inv_year">Year</label>
+              <input id="inv_year" name="inv_year" type="number" min="1886" max="<%= new Date().getFullYear() + 1 %>"
+                required value="<%= inv_year %>">
+
+              <label for="inv_description">Description</label>
+              <textarea id="inv_description" name="inv_description" required
+                minlength="10"><%= inv_description %></textarea>
+
+              <label for="inv_image">Image Path</label>
+              <input id="inv_image" name="inv_image" required value="<%= inv_image %>">
+
+              <label for="inv_thumbnail">Thumbnail Path</label>
+              <input id="inv_thumbnail" name="inv_thumbnail" required value="<%= inv_thumbnail %>">
+
+              <label for="inv_price">Price</label>
+              <input id="inv_price" name="inv_price" type="number" step="0.01" min="0" required
+                value="<%= inv_price %>">
+
+              <label for="inv_miles">Miles</label>
+              <input id="inv_miles" name="inv_miles" type="number" min="0" step="1" required value="<%= inv_miles %>">
+
+              <label for="inv_color">Color</label>
+              <input id="inv_color" name="inv_color" required value="<%= inv_color %>">
+
+              <button type="submit" disabled>Update Vehicle</button>
+          </form>
+
+          <script src="/js/inv-update.js"></script>
+</div>

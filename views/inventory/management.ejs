@@ -18,5 +18,19 @@
       </a>
     </div>
   </section>
+
+
+  <section class="inv-mgmt__manage">
+    <h2>Manage Inventory</h2>
+    <p>Select a classification from the list to see vehicles:</p>
+
+    <%- classificationList %>
+
+    <table id="inventoryDisplay"></table>
+
+    <noscript>JavaScript must be enabled to use this page.</noscript>
+  </section>
 </div>
 
+<!-- Hook up the JS file -->
+<script src="/js/inventory.js"></script>
