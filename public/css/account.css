@@ -124,3 +124,68 @@
   border-radius: 5px;
 }
 
+#create-user-view {
+  max-width: 460px;
+  margin: 2rem auto;
+  padding: 1.5rem 2rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+#create-user-view h1 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #222;
+}
+
+#create-user-view label {
+  display: block;
+  margin-top: 1rem;
+  font-weight: 600;
+}
+
+#create-user-view input,
+#create-user-view select {
+  width: 100%;
+  padding: 0.6rem;
+  margin-top: 0.25rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+#create-user-view button {
+  display: block;
+  width: 100%;
+  margin-top: 1.5rem;
+  padding: 0.7rem;
+  background-color: #0a66c2;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+#create-user-view button:hover {
+  background-color: #084b8a;
+}
+
+.alert {
+  padding: 0.7rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+}
+
+.alert-danger {
+  background-color: #ffe6e6;
+  border: 1px solid #cc0000;
+  color: #900;
+}
+
+.alert-success {
+  background-color: #e6ffed;
+  border: 1px solid #00a652;
+  color: #006b3c;
+}
+

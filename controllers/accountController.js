@@ -76,7 +76,7 @@ accountController.loginAccount = async function (req, res) {
     req.flash("success", `Welcome back, ${accountData.account_firstname}!`)
     return res.redirect("/account/")
   } catch (error) {
-    console.error("💥 Login error:", error)
+    console.error("Login error:", error)
     req.flash("error", "Something went wrong during login.")
     return res.status(500).render("account/login", { title: "Login", nav })
   }
@@ -264,6 +264,43 @@ accountController.updatePassword = async function (req, res, next) {
   }
 };
 
+accountController.buildCreateUser = async function (req, res, next) {
+  const nav = await utilities.getNav();
+  res.render("account/create", {
+  title: "Create User",
+  nav,
+  errors: null,
+  success: null,
+  account_firstname: "",
+  account_lastname: "",
+  account_email: "",
+  account_type: "",
+});
+
+}
+
+accountController.createUser = async function (req, res, next) {
+  const { account_firstname, account_lastname, account_email, account_password, account_type } = req.body;
+  const nav = await utilities.getNav();
+  const hashedPassword = await bcrypt.hash(account_password, 10);
+
+  const result = await accountModel.registerAccount(
+    account_firstname,
+    account_lastname,
+    account_email,
+    hashedPassword,
+    account_type
+  );
+
+  if (result.rowCount > 0) {
+    req.flash("success", "User created successfully.");
+    res.redirect("/account/");
+  } else {
+    req.flash("error", "Failed to create user.");
+    res.render("account/create", { title: "Create New User", nav, errors: [{ msg: "Failed to create user." }] });
+  }
+}
+
 
 module.exports = {
   buildLogin: accountController.buildLogin,
@@ -273,5 +310,8 @@ module.exports = {
   buildAccount: accountController.buildAccount,
   buildUpdateAccount: accountController.buildUpdateAccount,
   updateAccountInfo: accountController.updateAccountInfo,
-  updatePassword: accountController.updatePassword
+  updatePassword: accountController.updatePassword,
+  buildCreateUser: accountController.buildCreateUser,
+  createUser: accountController.createUser
+
 }

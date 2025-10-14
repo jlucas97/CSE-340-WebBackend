@@ -207,5 +207,73 @@ validate.checkUpdatePasswordData = async (req, res, next) => {
 };
 
 
+/* **********************************
+ * Admin Create User Validation Rules
+ * ********************************* */
+validate.adminCreateUserRules = () => {
+  return [
+    body("account_firstname")
+      .trim()
+      .notEmpty()
+      .withMessage("First name is required.")
+      .isLength({ min: 2 })
+      .withMessage("First name must be at least 2 characters long."),
+
+    body("account_lastname")
+      .trim()
+      .notEmpty()
+      .withMessage("Last name is required."),
+
+    body("account_email")
+      .trim()
+      .isEmail()
+      .normalizeEmail()
+      .withMessage("A valid email is required.")
+      .custom(async (account_email) => {
+        const emailExists = await accountModel.getAccountByEmail(account_email);
+        if (emailExists) {
+          throw new Error("Email already exists. Use a different one.");
+        }
+      }),
+
+    body("account_password")
+      .trim()
+      .isStrongPassword({
+        minLength: 12,
+        minLowercase: 1,
+        minUppercase: 1,
+        minNumbers: 1,
+        minSymbols: 1,
+      })
+      .withMessage("Password does not meet requirements."),
+
+    body("account_type")
+      .trim()
+      .isIn(["Client", "Employee", "Admin"])
+      .withMessage("Invalid account type."),
+  ];
+};
+
+/* **********************************
+ * Check Admin Create User Data
+ * ********************************* */
+validate.checkAdminCreateUserData = async (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    const nav = await utilities.getNav();
+    return res.status(400).render("account/create", {
+      title: "Create New User",
+      nav,
+      errors: errors.array(),
+      account_firstname: req.body.account_firstname,
+      account_lastname: req.body.account_lastname,
+      account_email: req.body.account_email,
+      account_type: req.body.account_type,
+    });
+  }
+  next();
+};
+
+
 
 module.exports = validate;

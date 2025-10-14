@@ -148,28 +148,25 @@ Util.checkJWTToken = (req, res, next) => {
  /* ****************************************
  * Require Employee or Admin for inventory admin areas
  * **************************************** */
-Util.checkAccountType = (req, res, next) => {
-  try {
-    // If JWT was valid, these will exist:
-    const logged = res.locals.loggedin
-    const acct = res.locals.accountData
 
-    if (!logged || !acct) {
-      req.flash("notice", "Please log in")
-      return res.redirect("/account/login")
+Util.checkAccountType = function (allowedTypes = []) {
+  return async function (req, res, next) {
+    try {
+      const accountData = res.locals.accountData;
+
+      if (!accountData || !allowedTypes.includes(accountData.account_type)) {
+        req.flash("error", "Unauthorized access.");
+        return res.redirect("/account/login");
+      }
+
+      next();
+    } catch (e) {
+      console.error("checkAccountType error:", e);
+      next(e);
     }
+  };
+};
 
-    const allowed = acct.account_type === "Employee" || acct.account_type === "Admin"
-    if (!allowed) {
-      req.flash("notice", "You are not authorized to access Inventory Management.")
-      return res.redirect("/account/login")
-    }
-
-    next()
-  } catch (e) {
-    next(e)
-  }
-}
 
 
 module.exports = Util

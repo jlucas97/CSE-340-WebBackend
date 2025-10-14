@@ -1,0 +1,37 @@
+<div id="create-user-view">
+  <h1><%= title %></h1>
+
+  <% if (errors && errors.length) { %>
+    <div class="alert alert-danger">
+      <ul><% errors.forEach(e => { %><li><%= e.msg %></li><% }) %></ul>
+    </div>
+  <% } %>
+
+  <% if (success) { %>
+    <div class="alert alert-success"><%= success %></div>
+  <% } %>
+
+  <form action="/account/create" method="post" novalidate>
+    <label for="account_firstname">First Name</label>
+    <input id="account_firstname" name="account_firstname" required value="<%= account_firstname || '' %>">
+
+    <label for="account_lastname">Last Name</label>
+    <input id="account_lastname" name="account_lastname" required value="<%= account_lastname || '' %>">
+
+    <label for="account_email">Email</label>
+    <input id="account_email" name="account_email" type="email" required value="<%= account_email || '' %>">
+
+    <label for="account_password">Password</label>
+    <input id="account_password" name="account_password" type="password" required>
+
+    <label for="account_type">Role</label>
+    <select id="account_type" name="account_type" required>
+      <option value="">Select Role</option>
+      <option value="Client" <%= account_type === 'Client' ? 'selected' : '' %>>Client</option>
+      <option value="Employee" <%= account_type === 'Employee' ? 'selected' : '' %>>Employee</option>
+      <option value="Admin" <%= account_type === 'Admin' ? 'selected' : '' %>>Admin</option>
+    </select>
+
+    <button type="submit">Create User</button>
+  </form>
+</div>

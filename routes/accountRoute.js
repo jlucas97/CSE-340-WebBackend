@@ -49,6 +49,26 @@ router.get(
   utilities.handleErrors(accountController.buildRegister)
 )
 
+// Admin: Create new user, the middleware checks for an Admin account type
+router.get(
+  "/create",
+  utilities.checkLogin,
+  utilities.checkAccountType(['Admin']), 
+  utilities.handleErrors(accountController.buildCreateUser)
+);
+
+// Process new user creation, only for Admins
+router.post(
+  "/create",
+  utilities.checkLogin,
+  utilities.checkAccountType(["Admin"]),
+  regValidate.adminCreateUserRules(),
+  regValidate.checkAdminCreateUserData,
+  utilities.handleErrors(accountController.createUser)
+);
+
+
+
 // Process Login
 router.post(
   "/login",
@@ -65,6 +85,7 @@ router.post(
   utilities.handleErrors(accountController.registerAccount)
 )
 
+// Process Logout
 router.get("/logout", (req, res) => {
   res.clearCookie("jwt")
   req.flash("success", "You have been logged out.")
